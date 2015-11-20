@@ -32,7 +32,7 @@ public class PersoanaController {
   }
 
   @RequestMapping(value="/persoana/{id}", method = RequestMethod.GET)
-  public ResponseEntity show(@PathVariable("id") int id) {
+  public ResponseEntity showone(@PathVariable("id") int id) {
     for(Persoana p : this.persoane) {
       if(p.getId() == id) {
         return new ResponseEntity<Persoana>(p, new HttpHeaders(), HttpStatus.OK);
@@ -42,22 +42,22 @@ public class PersoanaController {
   }
 
 
-@RequestMapping(value="/persoana/{id}", method = RequestMethod.POST)
-  public ResponseEntity show(@PathVariable("id") int id) {
+@RequestMapping(value="/persoana/{id} /{name}", method = RequestMethod.POST)
+  public ResponseEntity create(@PathVariable("id") int id, @PathVariable("name") String name) {
 
-    persoana pers = new persoana(id,"Nume");
+    Persoana pers = new Persoana(id,name);
     persoane.add(pers);
     return new ResponseEntity<Persoana>(pers, new HttpHeaders(), HttpStatus.OK);
   }
 
 
-  @RequestMapping(value="/persoana/{id}", method = RequestMethod.PUT)
-  public ResponseEntity show(@PathVariable("id") int id) {
+  @RequestMapping(value="/persoana/{id} /{name}", method = RequestMethod.PUT)
+  public ResponseEntity update(@PathVariable("id") int id, @PathVariable("name") String name) {
     for(Persoana p : persoane)
     {
       if(id == p.getId())
       {
-        p.setId = id++;
+        p.setName(name);
         return new ResponseEntity<Persoana>(p, new HttpHeaders(), HttpStatus.OK);
       }
     }
@@ -66,7 +66,7 @@ public class PersoanaController {
   }
 
 
-  @RequestMapping(value="/persoana/{id}", method = RequestMethod.DEL)
+  @RequestMapping(value="/persoana/{id}", method = RequestMethod.DELETE)
   public ResponseEntity remove(@PathVariable("id") int id) {
     for(Persoana p : this.persoane) {
       if(p.getId() == id) {

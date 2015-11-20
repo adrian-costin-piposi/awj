@@ -18,7 +18,7 @@ public class ProdusController {
 
   ProdusController() {
     Produs p1 = new Produs(1, "Apple");
-    Produs p2 = new Produs(2, "Google");
+    Produs p2 = new Produs(2, "Samsung");
     Produs p3 = new Produs(3, "Microsoft");
 
     produse.add(p1);
@@ -32,7 +32,7 @@ public class ProdusController {
   }
 
   @RequestMapping(value="/produs/{id}", method = RequestMethod.GET)
-  public ResponseEntity show(@PathVariable("id") int id) {
+  public ResponseEntity showoneprodus(@PathVariable("id") int id) {
     for(Produs p : this.produse) {
       if(p.getId() == id) {
         return new ResponseEntity<Produs>(p, new HttpHeaders(), HttpStatus.OK);
@@ -41,22 +41,23 @@ public class ProdusController {
     return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NOT_FOUND);
   }
 
-@RequestMapping(value="/produs/{id}", method = RequestMethod.POST)
-  public ResponseEntity show(@PathVariable("id") int id) {
 
-    produs prod = new produs(id,"Nume");
+@RequestMapping(value="/produs/{id} /{name}", method = RequestMethod.POST)
+  public ResponseEntity createprodus(@PathVariable("id") int id, @PathVariable("name") String name) {
+
+    Produs prod = new Produs(id,name);
     produse.add(prod);
     return new ResponseEntity<Produs>(prod, new HttpHeaders(), HttpStatus.OK);
   }
 
 
-  @RequestMapping(value="/produs/{id}", method = RequestMethod.PUT)
-  public ResponseEntity show(@PathVariable("id") int id) {
+  @RequestMapping(value="/produs/{id} /{name}", method = RequestMethod.PUT)
+  public ResponseEntity updateprodus(@PathVariable("id") int id, @PathVariable("name") String name) {
     for(Produs p : produse)
     {
       if(id == p.getId())
       {
-        p.setId = id++;
+        p.setName(name);
         return new ResponseEntity<Produs>(p, new HttpHeaders(), HttpStatus.OK);
       }
     }
@@ -64,8 +65,9 @@ public class ProdusController {
     return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NOT_FOUND);
   }
 
-  @RequestMapping(value="/produs/{id}", method = RequestMethod.DEL)
-  public ResponseEntity remove(@PathVariable("id") int id) {
+
+  @RequestMapping(value="/produs/{id}", method = RequestMethod.DELETE)
+  public ResponseEntity removeprodus(@PathVariable("id") int id) {
     for(Produs p : this.produse) {
       if(p.getId() == id) {
         this.produse.remove(p);

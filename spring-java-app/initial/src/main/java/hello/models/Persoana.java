@@ -21,4 +21,14 @@ public class Persoana {
   public int getId() {
     return this.id;
   }
+  
+  public void setId(int id)
+  {
+	  this.id = id;
+  }
+  
+  public void setName(String s)
+  {
+	  name = s;
+  }
 }

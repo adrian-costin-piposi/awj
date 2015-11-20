@@ -18,34 +18,58 @@ public class MasinaController {
 
   MasinaController() {
     Masina m1 = new Masina(1, "BMW");
-    Masina m2 = new Masina(2, "Audi");
+    Masina m2 = new Masina(2, "AUDI");
     Masina m3 = new Masina(3, "VW");
+	Masina m4 = new Masina(4, "Lada");
 
     masini.add(m1);
     masini.add(m2);
     masini.add(m3);
+	masini.add(m4);
   }
-
 
   @RequestMapping(value="/masina", method = RequestMethod.GET)
   public List<Masina> index() {
     return this.masini;
   }
 
-
   @RequestMapping(value="/masina/{id}", method = RequestMethod.GET)
-  public ResponseEntity show(@PathVariable("id") int id) {
-    for(Masina p : this.masini) {
-      if(p.getId() == id) {
-        return new ResponseEntity<Masina>(p, new HttpHeaders(), HttpStatus.OK);
+  public ResponseEntity showonemasina(@PathVariable("id") int id) {
+    for(Masina m : this.masini) {
+      if(m.getId() == id) {
+        return new ResponseEntity<Masina>(m, new HttpHeaders(), HttpStatus.OK);
       }
     }
     return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NOT_FOUND);
   }
-    
 
-  @RequestMapping(value="/masina/{id}", method = RequestMethod.DEL)
-  public ResponseEntity remove(@PathVariable("id") int id) {
+
+@RequestMapping(value="/masina/{id} /{name}", method = RequestMethod.POST)
+  public ResponseEntity createmasina(@PathVariable("id") int id, @PathVariable("name") String name) {
+
+    Masina m = new Masina(id,name);
+    masini.add(m);
+    return new ResponseEntity<Masina>(m, new HttpHeaders(), HttpStatus.OK);
+  }
+
+
+  @RequestMapping(value="/masina/{id} /{name}", method = RequestMethod.PUT)
+  public ResponseEntity updatemasina(@PathVariable("id") int id, @PathVariable("name") String name) {
+    for(Masina m : masini)
+    {
+      if(id == m.getId())
+      {
+        m.setName(name);
+        return new ResponseEntity<Masina>(m, new HttpHeaders(), HttpStatus.OK);
+      }
+    }
+
+    return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NOT_FOUND);
+  }
+
+
+  @RequestMapping(value="/masina/{id}", method = RequestMethod.DELETE)
+  public ResponseEntity removemasina(@PathVariable("id") int id) {
     for(Masina m : this.masini) {
       if(m.getId() == id) {
         this.masini.remove(m);
@@ -55,27 +79,3 @@ public class MasinaController {
     return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NOT_FOUND);
   }
 }
-
-  @RequestMapping(value="/masina/{id}", method = RequestMethod.POST)
-  public ResponseEntity show(@PathVariable("id") int id) {
-
-    masina m = new masina(id,"Nume");
-    masini.add(m);
-    return new ResponseEntity<Masina>(m, new HttpHeaders(), HttpStatus.OK);
-  }
-
-
-  @RequestMapping(value="/masina/{id}", method = RequestMethod.PUT)
-  public ResponseEntity show(@PathVariable("id") int id) {
-    for(Masina m : masini)
-    {
-      if(id == m.getId())
-      {
-        m.setId = id++;
-        return new ResponseEntity<Masina>(m, new HttpHeaders(), HttpStatus.OK);
-      }
-    }
-
-    return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NOT_FOUND);
-  }
-

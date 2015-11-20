@@ -14,27 +14,26 @@ import java.util.ArrayList;
 
 @RestController
 public class StudentController {
-  private List<Student> studenti = new ArrayList<Student>();
+  private List<Student> Studenti = new ArrayList<Student>();
 
   StudentController() {
-    Student s1 = new Student(1, "Alexandru");
-    Student s2 = new Student(2, "Bogdan");
-    Student s3 = new Student(3, "Costin");
+    Student s1 = new Student(1, "Ion");
+    Student s2 = new Student(2, "Vlad");
+    Student s3 = new Student(3, "Alex");
 
-    studenti.add(s1);
-    studenti.add(s2);
-    studenti.add(s3);
+    Studenti.add(s1);
+    Studenti.add(s2);
+    Studenti.add(s3);
   }
-
 
   @RequestMapping(value="/student", method = RequestMethod.GET)
   public List<Student> index() {
-    return this.studenti;
+    return this.Studenti;
   }
 
   @RequestMapping(value="/student/{id}", method = RequestMethod.GET)
-  public ResponseEntity show(@PathVariable("id") int id) {
-    for(Student s : this.studenti) {
+  public ResponseEntity showonestud(@PathVariable("id") int id) {
+    for(Student s : this.Studenti) {
       if(s.getId() == id) {
         return new ResponseEntity<Student>(s, new HttpHeaders(), HttpStatus.OK);
       }
@@ -43,22 +42,22 @@ public class StudentController {
   }
 
 
-@RequestMapping(value="/student/{id}", method = RequestMethod.POST)
-  public ResponseEntity show(@PathVariable("id") int id) {
+@RequestMapping(value="/student/{id} /{name}", method = RequestMethod.POST)
+  public ResponseEntity createstud(@PathVariable("id") int id, @PathVariable("name") String name) {
 
-    student stud = new student(id,"Dorian");
-    studenti.add(stud);
+    Student stud = new Student(id,name);
+    Studenti.add(stud);
     return new ResponseEntity<Student>(stud, new HttpHeaders(), HttpStatus.OK);
   }
 
 
-  @RequestMapping(value="/student/{id}", method = RequestMethod.PUT)
-  public ResponseEntity show(@PathVariable("id") int id) {
-    for(Student s : studenti)
+  @RequestMapping(value="/student/{id} /{name}", method = RequestMethod.PUT)
+  public ResponseEntity updatestud(@PathVariable("id") int id, @PathVariable("name") String name) {
+    for(Student s : Studenti)
     {
       if(id == s.getId())
       {
-        s.setId = id++;
+        s.setName(name);
         return new ResponseEntity<Student>(s, new HttpHeaders(), HttpStatus.OK);
       }
     }
@@ -66,11 +65,12 @@ public class StudentController {
     return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NOT_FOUND);
   }
 
-  @RequestMapping(value="/student/{id}", method = RequestMethod.DEL)
-  public ResponseEntity remove(@PathVariable("id") int id) {
-    for(Student s : this.studenti) {
+
+  @RequestMapping(value="/student/{id}", method = RequestMethod.DELETE)
+  public ResponseEntity removestud(@PathVariable("id") int id) {
+    for(Student s : this.Studenti) {
       if(s.getId() == id) {
-        this.studenti.remove(s);
+        this.Studenti.remove(s);
         return new ResponseEntity<String>(null, new HttpHeaders(), HttpStatus.NO_CONTENT);
       }
     }
