@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html ng-app="blog">
+<head>
+  <title>My application</title>
+  <link rel="stylesheet" media="all" href="css/bootstrap.min.css">
+  <link rel="stylesheet" media="all" href="css/custom.css">
+</head>
+<body>
+
+  <div class="container">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href=""> Lista Resurse Tema </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="#pers">Persoana</a></li>
+            <li><a href="#masina">Masina</a></li>
+            <li><a href="#animal">Animal</a></li>
+            <li><a href="#produs">Produs</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <hr/>
+
+  <div class="container">
+    <div >
+      <h1>{{ helloWorld }}</h1>
+      <h2 style="text-align:center">Proiect AWJ </h2>
+    </div>
+  </div>
+  <hr/>
+
+  <!-- /Person -->
+  <div class="container" ng-controller="HomeController">
+    <h1 id="pers">Person</h1>
+    <h2>List all persons</h2>
+    <table class="table table-bordered">
+      <tr>
+        <th ng-repeat="key in keys">{{ key }}</th>
+        <th style="width:210px;">Options</th>
+      </tr>
+      <tr ng-repeat="pers in persoane" data-id="{{pers.id}}">
+  <td>{{ pers.name }}</td>
+        <td>{{pers.id}}</td>
+        <td>
+          <a href="">
+            <span class="label label-success">
+              Open
+              <span class="glyphicon glyphicon-folder-open"></span>
+            </span>
+          </a>
+         <button ng-click="setUpdatePerson(pers)" class="btn btn-info btn-xs">
+              Edit
+              <span class="glyphicon glyphicon-edit"></span>
+          </a>
+  <button ng-click="deletePersoana(pers.id)" class="btn btn-danger btn-xs">
+              Remove
+              <span class="glyphicon glyphicon-remove"></span>
+  </button>
+          </a>
+        </td>
+      </tr>
+    </table>
+
+
+ <h2>Add new person</h2>
+    <table>
+    <tr>
+  <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="person.id"/></td>
+  
+    </tr>
+    <tr>
+  <td>Name</td>
+  <td><input type="text" class="form-control" ng-model="person.name"/></td>
+       </tr>
+    <tr>
+  <td colspan="2">
+   <button ng-click="addPersoana(person)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+    </tr>
+   </table>
+
+
+        <h2>Edit a person</h2>
+        <table>
+       <tr>
+        <td>ID</td>
+        <td><input type="text" ng-model="editPerson.id"></td>
+       </tr>
+       <tr>
+         <td>Name</td>
+         <td><input type="text" ng-model="editPerson.name"></td>
+       </tr>
+       <tr>
+         <td colspan="2">
+           <button class="btn btn-info btn-xs" ng-click="updatePerson()">
+            Updates
+           </button>
+         </td>
+       </tr>
+     </table>
+  </div>
+  </div>
+  <hr/>
+
+
+  <!-- /Masina -->
+  <div class="container" ng-controller="MasinaController">
+    <h1 id="masina">Masina</h1>
+    <h2>Lista masini</h2>
+    <table class="table table-bordered">
+      <tr>
+        <th ng-repeat="key in keys">{{ key }}</th>
+        <th style="width:210px;">Options</th>
+      </tr>
+      <tr ng-repeat="masina in masini" data-id="{masina.id}}">
+        <td>{{masina.name}}</td>
+        <td>{{masina.id}}</td>
+        <td>
+          <a href="">
+            <span class="label label-success">
+              Open
+              <span class="glyphicon glyphicon-folder-open"></span>
+            </span>
+          </a>
+         <button ng-click="setUpdateMasina(masina)" class="btn btn-info btn-xs">
+              Edit
+              <span class="glyphicon glyphicon-edit"></span>
+          </a>
+  <button ng-click="deleteMasina(masina.id)" class="btn btn-danger btn-xs">
+              Remove
+              <span class="glyphicon glyphicon-remove"></span>
+  </button>
+          </a>
+        </td>
+      </tr>
+    </table>
+
+
+ <h2>Adaugare masina</h2>
+    <table>
+    <tr>
+  <td>ID</td>
+       <td><input type="text" class="form-control" ng-model="masina.id"/></td>
+  
+    </tr>
+    <tr>
+  <td>Name</td>
+  <td><input type="text" class="form-control" ng-model="masina.name"/></td>
+       </tr>
+    <tr>
+  <td colspan="2">
+   <button ng-click="addMasina(masina)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+    </tr>
+   </table>
+
+        <h2>Editare masina</h2>
+        <table>
+       <tr>
+        <td>ID</td>
+        <td><input type="text" ng-model="editMasina.id"></td>
+       </tr>
+       <tr>
+         <td>Name</td>
+         <td><input type="text" ng-model="editMasina.name"></td>
+       </tr>
+       <tr>
+         <td colspan="2">
+           <button class="btn btn-info btn-xs" ng-click="updateMasina()">
+            Update
+           </button>
+         </td>
+       </tr>
+     </table>
+  </div>
+  </div>
+  <hr/>
+
+
+
+
+  <!-- /Animal -->
+  <div class="container" ng-controller="AnimalController">
+    <h1 id="animal">Animal</h1>
+    <h2>Lista animale</h2>
+    <table class="table table-bordered">
+      <tr>
+        <th ng-repeat="key in keys">{{ key }}</th>
+        <th style="width:210px;">Options</th>
+      </tr>
+      <tr ng-repeat="animal in animale" data-id="{{animal.id}}">
+        <td>{{animal.name}}</td>
+    <td>{{ animal.id }}</td>
+        <td>
+          <a href="">
+            <span class="label label-success">
+              Open
+              <span class="glyphicon glyphicon-folder-open"></span>
+            </span>
+          </a>
+         <button ng-click="setUpdateAnimal(animal)" class="btn btn-info btn-xs">
+              Edit
+              <span class="glyphicon glyphicon-edit"></span>
+          </a>
+    <button ng-click="deleteAnimal(animal.id)" class="btn btn-danger btn-xs">
+              Remove
+              <span class="glyphicon glyphicon-remove"></span>
+    </button>
+          </a>
+        </td>
+      </tr>
+    </table>
+
+  <h2>Adaugare animal</h2>
+    <table>
+     <tr>
+    <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="animal.id"/></td>
+    
+     </tr>
+     <tr>
+    <td>Name</td>
+    <td><input type="text" class="form-control" ng-model="animal.name"/></td>
+       </tr>
+     <tr>
+    <td colspan="2">
+      <button ng-click="addAnimal(animal)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+     </tr>
+    </table>
+
+
+        <h2>Editare animal</h2>
+        <table>
+       <tr>
+        <td>ID</td>
+        <td><input type="text" ng-model="editAnimal.id"></td>
+       </tr>
+       <tr>
+         <td>Name</td>
+         <td><input type="text" ng-model="editAnimal.name"></td>
+       </tr>
+       <tr>
+         <td colspan="2">
+           <button class="btn btn-info btn-xs" ng-click="updateAnimal()">
+            Update
+           </button>
+         </td>
+       </tr>
+     </table>
+   </div>
+  </div>
+  <hr/>
+
+
+   <!-- /Produs -->
+  <div class="container" ng-controller="ProdusController">
+    <h1 id="produs">Produs</h1>
+    <h2>Lista produse</h2>
+    <table class="table table-bordered">
+      <tr>
+        <th ng-repeat="key in keys">{{ key }}</th>
+        <th style="width:210px;">Options</th>
+      </tr>
+      <tr ng-repeat="produs in produse" data-id="{{produs.id}}">
+        <td>{{produs.name}}</td>
+    <td>{{ produs.id }}</td>
+        <td>
+          <a href="">
+            <span class="label label-success">
+              Open
+              <span class="glyphicon glyphicon-folder-open"></span>
+            </span>
+          </a>
+         <button ng-click="setUpdateProdus(produs)" class="btn btn-info btn-xs">
+              Edit
+              <span class="glyphicon glyphicon-edit"></span>
+          </a>
+    <button ng-click="deleteProdus(produs.id)" class="btn btn-danger btn-xs">
+              Remove
+              <span class="glyphicon glyphicon-remove"></span>
+    </button>
+          </a>
+        </td>
+      </tr>
+    </table>
+
+  <h2>Adaugare produs</h2>
+    <table>
+     <tr>
+    <td>ID</td>
+        <td><input type="text" class="form-control" ng-model="produs.id"/></td>
+    
+     </tr>
+     <tr>
+    <td>Name</td>
+    <td><input type="text" class="form-control" ng-model="produs.name"/></td>
+       </tr>
+     <tr>
+    <td colspan="2">
+      <button ng-click="addProdus(produs)" class="btn btn-primary btn-xs">Add</button>
+        </td>
+     </tr>
+    </table>
+
+
+        <h2>Editare produs</h2>
+        <table>
+       <tr>
+        <td>ID</td>
+        <td><input type="text" ng-model="editProdus.id"></td>
+       </tr>
+       <tr>
+         <td>Name</td>
+         <td><input type="text" ng-model="editProdus.name"></td>
+       </tr>
+       <tr>
+         <td colspan="2">
+           <button class="btn btn-info btn-xs" ng-click="updateProdus()">
+            Update
+           </button>
+         </td>
+       </tr>
+     </table>
+   </div>
+  </div>
+  <hr/>
+
+
+  <div class="container">
+    <footer class="footer">
+      <p class="text-muted pull-left">AWJ Base Project &copy; 2015-2016</p>
+      <p class="text-muted pull-right">Piposi Adrian-Costin, 331AB</p>
+    </footer>
+  </div>
+
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
