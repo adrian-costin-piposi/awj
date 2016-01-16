@@ -226,7 +226,7 @@ app.controller('ProdusController', ['$scope', '$http', function($scope, $http) {
    });
  
  
-   $scope.addDrink = function(produs) {
+   $scope.addProdus = function(produs) {
         produs.id = parseInt(produs.id);
         console.log(produs.id);
         $http({
@@ -243,7 +243,7 @@ app.controller('ProdusController', ['$scope', '$http', function($scope, $http) {
     };
 
 
-    $scope.deleteDrink = function(id) {
+    $scope.deleteProdus = function(id) {
 		angular.element('[data-id=' + id + ']').remove();
         $http({
             method: 'DELETE',

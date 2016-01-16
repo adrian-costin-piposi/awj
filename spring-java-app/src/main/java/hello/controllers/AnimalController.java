@@ -62,7 +62,7 @@ public class AnimalController {
     return this.animale;
   }
 
-  @CrossOrigin
+  @CrossOrigins
   @RequestMapping(value="/animal/{id}", method = RequestMethod.DELETE)
   public ResponseEntity remove(@PathVariable("id") int id) {
     for(Animal a : this.animale) {
